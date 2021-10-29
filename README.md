@@ -189,7 +189,7 @@ Setelah itu nyalakan konfigurasi dengan command `a2ensite franky.c10.com`.
 
 Webserver www.franky.c10.com pun telah dikonfigurasi dan bisa di lynx dari client dengan menggunakan `lynx www.franky.c10.com`
 
-![8](8.png)
+![8](img/8.png)
 
 ### No 9
 Soal:
@@ -207,7 +207,7 @@ RewriteRule ^home$ index.php/home
 ```
 
 Kembali ke client dan lakukan lynx untuk mengetes url www.franky.c10.com/index.php/home. Hasil lynx pun akan sama seperti No.8.
-![9](8.png)
+![9](img/8.png)
 
 ### No 10
 Soal:
@@ -286,7 +286,7 @@ Setelah itu kembali ke client untuk melakukan lynx dengan `lynx www.super.franky
 
 Hasil pun akan menjadi seperti ini:
 
-![10](10.png)
+![10](img/10.png)
 
 
 ### No 11
@@ -304,7 +304,7 @@ Untuk melakukan directory listing pada folder /public hanya diperlukan baris ini
 
 Saat mengakses url www.super.franky.c10.com/public menggunakan client, hasil akan menjadi seperti ini:
 
-![11](11.png)
+![11](img/11.png)
 
 ### No 12
 Soal:
@@ -319,7 +319,7 @@ ErrorDocument 404 /error/404.html
 
 Saat mengakses url yang salah menggunakan client, hasil akan menjadi seperti ini, sesuai dengan file yang telah disediakan:
 
-![12](12.png)
+![12](img/12.png)
 
 ### No 13
 Soal:
@@ -334,7 +334,7 @@ Alias "/js" "/var/www/super.franky.c10.com/public/js"
 
 Saat kembali ke klien untuk melakukan lynx pada url www.super.franky.yyy.com/js, hasilnya pun akan sama seperti saat mengakses www.super.franky.yyy.com/public/js.
 
-![13](13.png)
+![13](img/13.png)
 
 ### No 14
 Soal:  
