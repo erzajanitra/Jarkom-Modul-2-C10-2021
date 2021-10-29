@@ -33,6 +33,7 @@
   };
   ```
 - Membuat folder kaizoku pada `/etc/bind/` dengan command`mkdir /etc/bind/kaizoku`, kemudian membuat file config `franky.c10.com`
+  ![kaizoku](https://user-images.githubusercontent.com/75319371/139450937-296f9c76-98f8-4333-ade0-70b515e2700a.JPG)
 - Memodifikasi config pada file `/etc/bind/kaizoku/franky.c10.com`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada franky.c10.com, kemudian domain dipetakan pada IP Enieslobby yaitu `10.19.2.2`. Untuk membuat alias www.franky.c10.com menggunakan CNAME. Berikut adalah modifikasi config yang telah dilakukan:
 ![config1 - Copy](https://user-images.githubusercontent.com/75319371/139430839-52828f87-3d9a-4e51-8b22-a2318c1ad0e9.JPG)
 
@@ -62,7 +63,7 @@
 
 ### No 5
 - **Soal** : Buat Water7 sebagai DNS Slave untuk domain utama
-- Memodifikasi zone franky.c10.com pada /etc/named.conf.local dengan menambahkan notify kepada IP Water7 sebagai slave.
+- Memodifikasi zone franky.c10.com pada /etc/named.conf.local Enieslobby dengan menambahkan notify kepada IP Water7 sebagai DNS slave.
 ```
      notify true	
      also-notify { 10.19.2.3; };
@@ -86,6 +87,7 @@
      - Memodifikasi config pada file `/etc/bind/kaizoku/2.19.10.in-addr.arpa` dengan membuat subdomain mecha.franky.c10.com dan domain alias                                www.mecha.franky.c10.com. Kemudian subdomain dan aliasnya didelegasikan ke Water7 dengan `ns1` dengan mengarahkan ke IP Water7 yaitu `10.19.2.3`. Berikut            adalah modifikasi config yang telah dilakukan:
      ![config1 - Copy (3)](https://user-images.githubusercontent.com/75319371/139446704-6895d384-7377-4b3f-bf60-a98b8444afc2.JPG)
      - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`
+       ![image](https://user-images.githubusercontent.com/75319371/139450593-9b68c32b-ea1a-4e08-83f7-076e8000a704.png)
      - Menambahkan `allow-transfer { 10.19.2.3; }` pada file `/etc/bind/named.conf.local` sehingga zone franky.c10.com menjadi
           ```
           zone "franky.c10.com" {
@@ -98,6 +100,7 @@
           ```
  - Pada Water7
      - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`
+       ![image](https://user-images.githubusercontent.com/75319371/139450612-f00b0edb-dde1-4062-a3db-678fede7f573.png)
      - Menambahkan zone mecha.franky.c10.com pada `/etc/bind/named.conf.local` sebagai berikut
        ```
        zone "mecha.franky.c10.com" {
@@ -106,6 +109,7 @@
        };
        ```
      - Membuat folder sunnygo pada `/etc/bind/` dengan command`mkdir /etc/bind/sunnygo`, kemudian membuat file config `mecha.franky.c10.com`
+       ![sunnygo](https://user-images.githubusercontent.com/75319371/139451320-62f0e568-6f1c-4fe2-a347-fd4b96ce6f36.JPG)
      - Memodifikasi config pada file `/etc/bind/sunnygo/mecha.franky.c10.com`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada mecha.franky.c10.com,        kemudian domain dipetakan pada IP Skypie yaitu `10.19.2.4`. Untuk membuat alias www.mecha.franky.c10.com menggunakan CNAME yang juga mengarah ke IP Skypie.          Berikut adalah modifikasi config yang telah dilakukan:
        ![config 2](https://user-images.githubusercontent.com/75319371/139448507-f0b45317-e406-4342-a72e-a827d6c50349.JPG)
 - Testing melakukan ping mecha.franky.c10.com dan www.mecha.franky.c10.com pada Alabasta. Dapat terlihat bahwa IP mengarah pada IP Skypie. <br/>
