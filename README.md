@@ -108,11 +108,18 @@
      - Membuat folder sunnygo pada `/etc/bind/` dengan command`mkdir /etc/bind/sunnygo`, kemudian membuat file config `mecha.franky.c10.com`
      - Memodifikasi config pada file `/etc/bind/sunnygo/mecha.franky.c10.com`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada mecha.franky.c10.com,        kemudian domain dipetakan pada IP Skypie yaitu `10.19.2.4`. Untuk membuat alias www.mecha.franky.c10.com menggunakan CNAME yang juga mengarah ke IP Skypie.          Berikut adalah modifikasi config yang telah dilakukan:
        ![config 2](https://user-images.githubusercontent.com/75319371/139448507-f0b45317-e406-4342-a72e-a827d6c50349.JPG)
-- Testing melakukan ping mecha.franky.c10.com pada Alabasta. Dapat terlihat bahwa ip mecha.franky.c10.com mengarah pada Skypie.
+- Testing melakukan ping mecha.franky.c10.com dan www.mecha.franky.c10.com pada Alabasta. Dapat terlihat bahwa IP mengarah pada IP Skypie. <br/>
    ![image](https://user-images.githubusercontent.com/75319371/139448759-69f26461-c803-4f1d-a70a-6741e14de681.png)
+   ![image](https://user-images.githubusercontent.com/75319371/139449157-b3473b67-a337-4001-8d1c-16a72b6a596c.png)
 
 ### No 7
 - **Soal** : Buat subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+- Memodifikasi config pada file `/etc/bind/sunnygo/mecha.franky.c10.com`. Membuat subdomain general.mecha.franky.c10.com dengan alias 
+  www.general.mecha.franky.c10.com. IP subdomain ini juga mengarah ke IP Skypie. Berikut adalah modifikasi config yang telah dilakukan:
+  ![config 2 1](https://user-images.githubusercontent.com/75319371/139449610-ed886d01-c401-40d8-b709-b807ead6e187.JPG)
+- Testing melakukan ping general.mecha.franky.c10.com dan www.general.mecha.franky.c10.com pada Alabasta. Dapat terlihat bahwa IP mengarah pada IP Skypie.
+  ![image](https://user-images.githubusercontent.com/75319371/139449728-20cbaf28-068f-4948-813b-e1577485f69b.png)
+  ![image](https://user-images.githubusercontent.com/75319371/139449783-f98a069e-64e0-406d-aa35-fe7f06232763.png)
 
 ### No 8
 ### No 8
