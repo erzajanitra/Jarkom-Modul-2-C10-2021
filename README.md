@@ -364,8 +364,9 @@ Listen 15000
 Listen 15500
 ...
 ```
-Lakukan restart pada apache
+Aktifkan situs dan lakukan restart pada apache
 ```
+a2ensite general.mecha.franky.c10.com
 service apache2 restart
 ```
 Buat document rootnya dengan membuat direktori di /var/www
