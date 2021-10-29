@@ -126,12 +126,216 @@
   ![image](https://user-images.githubusercontent.com/75319371/139449783-f98a069e-64e0-406d-aa35-fe7f06232763.png)
 
 ### No 8
-### No 8
+Soal:
+Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
+
+Jawab:
+Buat direktori baru yaitu /var/www/franky.c10.com dengan menggunakan `mkdir /var/www/franky.c10.com` 
+
+Setelah itu, edit konfigurasi /etc/apache2/sites-available/franky.c10.com.conf agar filenya menjadi seperti ini
+
+```console
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/franky.c10.com
+        ServerName franky.c10.com
+        ServerAlias www.franky.c10.com
+
+        <Directory /var/www/franky.c10.com/home>
+                Options +Indexes
+        </Directory>
+
+        <Directory /var/www/franky.c10.com>
+                Options +FollowSymLinks -Multiviews
+                AllowOverride All
+        </Directory>
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+```
+
+Untuk No.8 ini hanya diperlukan penambahan bagian ini dalam file tersebut untuk mengkonfigurasi webserver www.franky.c10.com
+
+```
+DocumentRoot /var/www/franky.c10.com
+ServerName franky.c10.com
+ServerAlias www.franky.c10.com
+```
+
+Jangan lupa untuk mendownload file yang telah disediakan dari soal menggunakan wget, lalu jangan lupa juga untuk diunzip. 
+
+Setelah itu nyalakan konfigurasi dengan command `a2ensite franky.c10.com`.
+
+Webserver www.franky.c10.com pun telah dikonfigurasi dan bisa di lynx dari client dengan menggunakan `lynx www.franky.c10.com`
+
+![8](8.png)
+
 ### No 9
+Soal:
+Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
+
+Jawab:
+Untuk konfigurasi No.9, yang diperlukan adalah menambahkan file .htaccess pada folder franky.c10.com, yaitu di `/var/www/franky.c10.com/.htaccess`
+
+Tambahkan kode berikut pada file .htaccess tersebut agar url www.franky.c10.com/index.php/home dapat menjadi menjadi www.franky.c10.com/home.
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^home$ index.php/home
+```
+
+Kembali ke client dan lakukan lynx untuk mengetes url www.franky.c10.com/index.php/home. Hasil lynx pun akan sama seperti No.8.
+![9](8.png)
+
 ### No 10
+Soal:
+Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com
+
+Jawab:
+Sama seperti No.8, yaitu membuat direktori baru, yaitu /var/www/super.franky.c10.com dengan menggunakan mkdir.
+
+Setelah itu, edit file konfigurasi pada /etc/apache2/sites-available/super.franky.c10.com agar berisi seperti ini:
+
+```
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.c10.com
+        ServerName super.franky.c10.com
+        ServerAlias www.super.franky.c10.com
+        
+        <Directory /var/www/super.franky.c10.com>
+                AllowOverride All 
+        </Directory>
+    
+        <Directory /var/www/super.franky.c10.com/public>
+                Options +Indexes
+        </Directory>
+        
+        <Directory /var/www/super.franky.c10.com/error>
+                Options -Indexes
+        </Directory>
+
+        <Directory /var/www/super.franky.c10.com/public/js>
+                Options +Indexes
+        </Directory>
+
+        ErrorDocument 404 /error/404.html
+        Alias "/js" "/var/www/super.franky.c10.com/public/js"
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+       # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+```
+
+Untuk No.10 ini hanya bagian ini yang perlu diubah dari template awal.
+
+```
+DocumentRoot /var/www/super.franky.c10.com
+ServerName super.franky.c10.com
+ServerAlias www.super.franky.c10.com
+```
+
+Jangan lupa untuk mendownload dan mengextract file yang disediakan menggunakan wget agar isi dari website dapat tampil.
+
+Jangan lupa juga untuk melakukan `a2ensite super.franky.c10.com`.
+
+Setelah itu kembali ke client untuk melakukan lynx dengan `lynx www.super.franky.c10.com`.
+
+Hasil pun akan menjadi seperti ini:
+
+![10](10.png)
+
+
 ### No 11
+Soal:
+Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
+
+Jawab:
+Untuk melakukan directory listing pada folder /public hanya diperlukan baris ini pada konfigurasi /etc/apache2/sites-available/super.franky.c10.com:
+
+```
+<Directory /var/www/super.franky.c10.com/public>
+        Options +Indexes
+</Directory>
+```
+
+Saat mengakses url www.super.franky.c10.com/public menggunakan client, hasil akan menjadi seperti ini:
+
+![11](11.png)
+
 ### No 12
+Soal:
+Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache .
+ 
+Jawab:
+Untuk mengganti error kode pada apache hanya diperlukan baris ini pada konfigurasi /etc/apache2/sites-available/super.franky.c10.com:
+
+```
+ErrorDocument 404 /error/404.html
+```
+
+Saat mengakses url yang salah menggunakan client, hasil akan menjadi seperti ini, sesuai dengan file yang telah disediakan:
+
+![12](12.png)
+
 ### No 13
+Soal:
+Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
+
+Jawab:
+Untuk menambahkan virtual host hanya diperlukan baris ini pada konfigurasi /etc/apache2/sites-available/super.franky.c10.com:
+
+```
+Alias "/js" "/var/www/super.franky.c10.com/public/js"
+```
+
+Saat kembali ke klien untuk melakukan lynx pada url www.super.franky.yyy.com/js, hasilnya pun akan sama seperti saat mengakses www.super.franky.yyy.com/public/js.
+
+![13](13.png)
+
 ### No 14
 Soal:  
 Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
