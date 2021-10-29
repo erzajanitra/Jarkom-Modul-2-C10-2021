@@ -24,7 +24,7 @@
       ![image](https://user-images.githubusercontent.com/75319371/139429358-725b93b1-0f94-4cf9-a8c4-a28af2169e60.png)
 
 ### No 2
-- Membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku 
+- **Soal** : Membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku 
 - Menambahkan zone franky.c10.com pada file `/etc/bind/named.conf.local`
   ```
   zone "franky.c10.com" {
@@ -86,7 +86,7 @@
 - Pada Enieslobby
      - Memodifikasi config pada file `/etc/bind/kaizoku/2.19.10.in-addr.arpa` dengan membuat subdomain mecha.franky.c10.com dan domain alias                                www.mecha.franky.c10.com. Kemudian subdomain dan aliasnya didelegasikan ke Water7 dengan `ns1` dengan mengarahkan ke IP Water7 yaitu `10.19.2.3`. Berikut            adalah modifikasi config yang telah dilakukan:
      ![config1 - Copy (3)](https://user-images.githubusercontent.com/75319371/139446704-6895d384-7377-4b3f-bf60-a98b8444afc2.JPG)
-     - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`
+     - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`<br/>
        ![image](https://user-images.githubusercontent.com/75319371/139450593-9b68c32b-ea1a-4e08-83f7-076e8000a704.png)
      - Menambahkan `allow-transfer { 10.19.2.3; }` pada file `/etc/bind/named.conf.local` sehingga zone franky.c10.com menjadi
           ```
@@ -99,7 +99,7 @@
           };
           ```
  - Pada Water7
-     - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`
+     - Edit file `/etc/bind/named.conf.options` dengan menambahkan `allow-query{any;};` dan comment `dnssec-validation auto;`<br/>
        ![image](https://user-images.githubusercontent.com/75319371/139450612-f00b0edb-dde1-4062-a3db-678fede7f573.png)
      - Menambahkan zone mecha.franky.c10.com pada `/etc/bind/named.conf.local` sebagai berikut
        ```
