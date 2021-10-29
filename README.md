@@ -36,11 +36,40 @@
 - Memodifikasi config pada file `/etc/bind/kaizoku/franky.c10.com`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada franky.c10.com, kemudian domain dipetakan pada IP Enieslobby yaitu `10.19.2.2`. Untuk membuat alias www.franky.c10.com menggunakan CNAME. Berikut adalah modifikasi config yang telah dilakukan:
 ![config1 - Copy](https://user-images.githubusercontent.com/75319371/139430839-52828f87-3d9a-4e51-8b22-a2318c1ad0e9.JPG)
 
+
 ### No 3
+- **Soal** : Membuat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
+- Memodifikasi config pada file `/etc/bind/kaizoku/franky.c10.com`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada super.franky.c10.com, kemudian domain dipetakan pada IP Skypie yaitu `10.19.2.4`. Untuk membuat alias www.super.franky.c10.com menggunakan CNAME. Berikut adalah modifikasi config yang telah dilakukan:
+![config1 - Copy (2)](https://user-images.githubusercontent.com/75319371/139438601-2b7572c4-169b-43d6-8838-f84ba2d9955e.JPG)
+- Test melakukan ping super.franky.c10.com dan www.super.franky.c10.com pada Loguetown. Dapat terlihat bahwa ip mengarah pada Skypie. <br/>
+![image](https://user-images.githubusercontent.com/75319371/139439504-251f363f-e494-4af0-94b5-98e42a920b80.png)
+![image](https://user-images.githubusercontent.com/75319371/139439591-97413c62-79f6-46d5-96d9-23db1f72fefd.png)
+
 ### No 4
+- **Soal** : Membuat reverse domain untuk domain utama
+- Menambahkan 2.19.10.in-addr.arpa pada file `/etc/bind/named.conf.local`
+  ```
+     zone "2.19.10.in-addr.arpa" {
+         type master;
+         file "/etc/bind/kaizoku/2.19.10.in-addr.arpa";
+     };
+  ```
+- Membuat file config `2.19.10.in-addr.arpa`pada folder kaizoku
+- Memodifikasi config pada file `/etc/bind/kaizoku/2.19.10.in-addr.arpa`. Menggunakan NS untuk mendelegasikan zone yang telah dibuat pada 2.19.10.in-addr.arpa dengan domain franky.c10.com. Menggunakan PTR untuk mereverse domain dengan 2 sebagai byte keempat dari IP Enieslobby. Berikut adalah modifikasi config yang telah dilakukan:
+![config addr arpa](https://user-images.githubusercontent.com/75319371/139440348-1811630e-ff71-4a14-9dfb-cc6bb50216c7.JPG)
+- Testing konfigurasi dengan `host -t PTR 10.19.2.2` pada Loguetown
+![image](https://user-images.githubusercontent.com/75319371/139440871-318afab8-a0eb-4a96-9c4a-a40cffb7e176.png)
+
 ### No 5
+- **Soal** : Buat Water7 sebagai DNS Slave untuk domain utama
+
 ### No 6
+- **Soal** : Buat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+
 ### No 7
+- **Soal** : Buat subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+
+### No 8
 ### No 8
 ### No 9
 ### No 10
